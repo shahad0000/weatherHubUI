@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router";
 
 const BASE_URL = "https://weatherhubapi.onrender.com";
 
@@ -8,7 +7,6 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
-  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,10 +18,7 @@ const Signup = () => {
         { withCredentials: true }
       );
       setMsg("Signup successful!");
-      setTimeout(() => {
-        navigate("/weather");
-      }, 300);
-      console.log(res);
+      console.log(res.data);
     } catch (error: any) {
       setMsg(error?.response?.data?.message || "Signup failed");
       console.error(error);

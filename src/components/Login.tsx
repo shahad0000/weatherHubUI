@@ -16,14 +16,13 @@ const Login = () => {
     setLoading(true);
     setError(null);
     try {
-      await axios.post(
+      const res = await axios.post(
         `${BASE_URL}/auth/signin`,
         { email, password },
         { withCredentials: true }
       );
-      setTimeout(() => {
-        navigate("/weather");
-      }, 300);
+      console.log(res.data)
+
     } catch (err: any) {
       if (err.response?.status === 401) {
         setError("Invalid email or password.");
