@@ -17,26 +17,26 @@ const Weather = () => {
   }, []);
   return (
     <div>
-      {weather && (
+      {weather?  (
         <div>
-          <h2>Weather in {weather.name}</h2>
-          <p>
-            <strong>Temperature:</strong>{" "}
-            {(weather.main.temp - 273.15).toFixed(1)}
-            °C
-          </p>
-          <p>
-            <strong>Condition:</strong> {weather.weather[0].description}
-          </p>
-          <p>
-            <strong>Wind Speed:</strong> {weather.wind.speed} m/s
-          </p>
-          <p>
-            <strong>Fetched At:</strong>{" "}
-            {new Date(weather.fetchedAt).toLocaleString()}
-          </p>
-        </div>
-      )}
+        <h2>Weather in {weather.name}</h2>
+        <p>
+          <strong>Temperature:</strong>
+          {(weather.main.temp - 273.15).toFixed(1)}
+          °C
+        </p>
+        <p>
+          <strong>Condition:</strong> {weather.weather[0].description}
+        </p>
+        <p>
+          <strong>Wind Speed:</strong> {weather.wind.speed} m/s
+        </p>
+        <p>
+          <strong>Fetched At:</strong>
+          {new Date(weather.fetchedAt).toLocaleString()}
+        </p>
+      </div>
+      ): (<div>Loading....</div>)}
     </div>
   );
 };
