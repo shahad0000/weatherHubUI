@@ -21,7 +21,9 @@ const Login = () => {
         { email, password },
         { withCredentials: true }
       );
-      navigate("/weather");
+      setTimeout(() => {
+        navigate("/weather");
+      }, 300);
     } catch (err: any) {
       if (err.response?.status === 401) {
         setError("Invalid email or password.");

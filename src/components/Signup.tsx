@@ -20,7 +20,9 @@ const Signup = () => {
         { withCredentials: true }
       );
       setMsg("Signup successful!");
-      navigate("/weather");
+      setTimeout(() => {
+        navigate("/weather");
+      }, 300);
       console.log(res);
     } catch (error: any) {
       setMsg(error?.response?.data?.message || "Signup failed");
