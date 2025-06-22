@@ -1,11 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router";
 
 const BASE_URL = "https://weatherhubapi.onrender.com";
 
 const Login = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
