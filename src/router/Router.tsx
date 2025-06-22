@@ -3,7 +3,6 @@ import Signup from "../components/Signup";
 import Weather from "../components/Weather";
 import Login from "../components/Login";
 import Layout from "../components/Layout";
-import { Navigate } from "react-router";
 
 const router = createBrowserRouter([
   {

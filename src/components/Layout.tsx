@@ -1,4 +1,3 @@
-import Weather from './Weather'
 import { Outlet } from 'react-router'
 
 const Layout = () => {
