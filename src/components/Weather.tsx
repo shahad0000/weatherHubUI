@@ -12,6 +12,7 @@ const Weather = () => {
         withCredentials: true,
       });
       setWeather(res.data);
+      console.log(res.data)
     } catch (err: any) {
       console.error(err);
     }
