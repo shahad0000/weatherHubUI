@@ -20,27 +20,18 @@ const Weather = () => {
     getWeather();
   }, []);
 
-
-  if (
-    !weather ||
-    !weather.main ||
-    !weather.weather ||
-    !weather.weather[0] ||
-    !weather.wind
-  ) {
-    return <div>Loading...</div>;
-  }  
-
   return (
     <div>
-      {weather && (
+      {weather &
+        weather.main &
+        weather.weather &
+        weather.weather[0] &
+        weather.wind && (
         <div>
           <h2>Weather in {weather.name || "Unknown Location"}</h2>
           <p>
             <strong>Temperature:</strong>
-            {weather.main?.temp !== undefined
-              ? (weather.main.temp - 273.15).toFixed(1)
-              : "N/A"}
+            {(weather.main.temp - 273.15).toFixed(1)}
             °C
           </p>
           <p>
@@ -49,13 +40,11 @@ const Weather = () => {
           </p>
           <p>
             <strong>Wind Speed:</strong>
-            {weather.wind?.speed !== undefined ? weather.wind.speed : "N/A"} m/s
+            {weather.wind.speed} m/s
           </p>
           <p>
             <strong>Fetched At:</strong>
-            {weather.fetchedAt
-              ? new Date(weather.fetchedAt).toLocaleString()
-              : "N/A"}
+            {weather.fetchedAt}
           </p>
         </div>
       )}
