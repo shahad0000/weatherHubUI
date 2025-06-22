@@ -22,32 +22,32 @@ const Weather = () => {
 
   return (
     <div>
-      {weather &
-        weather.main &
-        weather.weather &
-        weather.weather[0] &
+      {weather &&
+        weather.main &&
+        weather.weather &&
+        weather.weather[0] &&
         weather.wind && (
-        <div>
-          <h2>Weather in {weather.name || "Unknown Location"}</h2>
-          <p>
-            <strong>Temperature:</strong>
-            {(weather.main.temp - 273.15).toFixed(1)}
-            °C
-          </p>
-          <p>
-            <strong>Condition:</strong>
-            {weather.weather?.[0]?.description || "N/A"}
-          </p>
-          <p>
-            <strong>Wind Speed:</strong>
-            {weather.wind.speed} m/s
-          </p>
-          <p>
-            <strong>Fetched At:</strong>
-            {weather.fetchedAt}
-          </p>
-        </div>
-      )}
+          <div>
+            <h2>Weather in {weather.name || "Unknown Location"}</h2>
+            <p>
+              <strong>Temperature:</strong>
+              {(weather.main.temp - 273.15).toFixed(1)}
+              °C
+            </p>
+            <p>
+              <strong>Condition:</strong>
+              {weather.weather?.[0]?.description || "N/A"}
+            </p>
+            <p>
+              <strong>Wind Speed:</strong>
+              {weather.wind.speed} m/s
+            </p>
+            <p>
+              <strong>Fetched At:</strong>
+              {weather.fetchedAt}
+            </p>
+          </div>
+        )}
     </div>
   );
 };
