@@ -1,11 +1,11 @@
 import './App.css'
-import Weather from './components/Weather'
+import Router from './router/Router'
 
 function App() {
 
   return (
     <>
-    <Weather />
+    <Router />
     </>
   )
 }
