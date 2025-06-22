@@ -17,26 +17,34 @@ const Weather = () => {
   }, []);
   return (
     <div>
-      {weather?  (
+      {weather ? (
         <div>
-        <h2>Weather in {weather.name}</h2>
-        <p>
-          <strong>Temperature:</strong>
-          {(weather.main.temp - 273.15).toFixed(1)}
-          °C
-        </p>
-        <p>
-          <strong>Condition:</strong> {weather.weather[0].description}
-        </p>
-        <p>
-          <strong>Wind Speed:</strong> {weather.wind.speed} m/s
-        </p>
-        <p>
-          <strong>Fetched At:</strong>
-          {new Date(weather.fetchedAt).toLocaleString()}
-        </p>
-      </div>
-      ): (<div>Loading....</div>)}
+          <h2>Weather in {weather.name || "Unknown Location"}</h2>
+          <p>
+            <strong>Temperature:</strong>
+            {weather.main?.temp !== undefined
+              ? (weather.main.temp - 273.15).toFixed(1)
+              : "N/A"}{" "}
+            °C
+          </p>
+          <p>
+            <strong>Condition:</strong>
+            {weather.weather?.[0]?.description || "N/A"}
+          </p>
+          <p>
+            <strong>Wind Speed:</strong>
+            {weather.wind?.speed !== undefined ? weather.wind.speed : "N/A"} m/s
+          </p>
+          <p>
+            <strong>Fetched At:</strong>
+            {weather.fetchedAt
+              ? new Date(weather.fetchedAt).toLocaleString()
+              : "N/A"}
+          </p>
+        </div>
+      ) : (
+        <div>Loading....</div>
+      )}
     </div>
   );
 };
