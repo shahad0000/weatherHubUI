@@ -46,7 +46,8 @@ const Login = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border"
+              className="border border-gray-400 rounded-sm"
+              placeholder="Email address"
             />
           </div>
           <div>
@@ -56,16 +57,20 @@ const Login = () => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border"
+              className="border border-gray-400 rounded-sm"
+              placeholder="password"
             />
           </div>
-          <button
-            type="submit"
-            className=" bg-indigo-100 border border-gray-400 rounded-sm px-11"
-            disabled={loading}
-          >
-            {loading ? "Logging in..." : "Login"}
-          </button>
+          <div className="mt-4">
+            <button
+              type="submit"
+              className=" bg-indigo-100 border border-gray-400 rounded-sm px-11"
+              disabled={loading}
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </div>
+
           {error && <p className="text-rose-800">{error}</p>}
         </form>
       </div>
