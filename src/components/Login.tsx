@@ -1,25 +1,27 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const BASE_URL = "https://weatherhubapi.onrender.com";
+// const BASE_URL = "http://localhost:3000";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.post(
+      await axios.post(
         `${BASE_URL}/auth/signin`,
         { email, password },
         { withCredentials: true }
       );
-      console.log(res.data);
+      navigate("/");
     } catch (err: any) {
       if (err.response?.status === 401) {
         setError("Invalid email or password.");
@@ -46,7 +48,7 @@ const Login = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border border-gray-400 rounded-sm"
+              className="border border-gray-400 px-2 rounded-sm"
               placeholder="Email address"
             />
           </div>
@@ -57,14 +59,14 @@ const Login = () => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border border-gray-400 rounded-sm"
+              className="border border-gray-400 rounded-sm px-2"
               placeholder="password"
             />
           </div>
           <div className="mt-4">
             <button
               type="submit"
-              className=" bg-indigo-100 border border-gray-400 rounded-sm px-11"
+              className=" bg-amber-200 border border-gray-400  rounded-sm px-11"
               disabled={loading}
             >
               {loading ? "Logging in..." : "Login"}

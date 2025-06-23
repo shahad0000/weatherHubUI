@@ -1,24 +1,25 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router";
 const BASE_URL = "https://weatherhubapi.onrender.com";
+// const BASE_URL = "http://localhost:3000";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
-
+  const navigate = useNavigate();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
+      await axios.post(
         `${BASE_URL}/auth/signup`,
         { email, password },
         { withCredentials: true }
       );
       setMsg("Signup successful!");
-      console.log(res.data);
+      navigate("/");
     } catch (error: any) {
       setMsg(error?.response?.data?.message || "Signup failed");
       console.error(error);
@@ -43,7 +44,7 @@ const Signup = () => {
             required
             className="border border-gray-400 p-1"
           />
-<br />
+          <br />
           <label htmlFor="">Password</label>
           <input
             type="password"
@@ -56,7 +57,10 @@ const Signup = () => {
           />
           <br />
           <br />
-          <button className="bg-indigo-100 p-1 border border-gray-400 rounded-md" type="submit">
+          <button
+            className="bg-indigo-100 p-1 border border-gray-400 rounded-md"
+            type="submit"
+          >
             Sign Up
           </button>
         </form>

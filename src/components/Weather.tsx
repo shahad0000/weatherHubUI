@@ -1,53 +1,84 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-
-const BASE_URL = "https://weatherhubapi.onrender.com";
+import { useState } from "react";
+import getWeather from "../services/weather.services";
 
 const Weather = () => {
   const [weather, setWeather] = useState<any>(null);
+  const [lat, setLat] = useState("");
+  const [lon, setLon] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
-  const getWeather = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!lat || !lon) {
+      setError("Please enter both latitude and longitude.");
+      return;
+    }
     try {
-      const res = await axios.get(`${BASE_URL}/weather?lat=24.71&lon=46.68`, {
-        withCredentials: true,
-      });
+      const res = await getWeather(lat, lon);
+
       setWeather({
-        ...res.data.data,
-        fetchedAt: res.data.fetchedAt,
-        source: res.data.source,
+        ...res.data,
+        fetchedAt: res.fetchedAt,
+        source: res.source,
       });
-      
-      console.log(res.data)
+
     } catch (err: any) {
       console.error(err);
     }
   };
-  useEffect(() => {
-    getWeather();
-  }, []);
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-sky-50">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-indigo-50">
+      <h1 className="text-4xl text-gray-600">
+      Enter your coordinates to get the current weather
+      </h1>
+      <div>
+        <form onSubmit={handleSubmit} className="flex justify-center gap-2 m-4">
+          <input
+            type="text"
+            placeholder="Latitude"
+            value={lat}
+            onChange={(e) => setLat(e.target.value)}
+            required
+            className="border bg-white px-2 border-gray-400 p-1"
+          />
+          <br />
+          <input
+            type="text"
+            placeholder="Longitude"
+            value={lon}
+            onChange={(e) => setLon(e.target.value)}
+            required
+            className="border bg-white px-2 border-gray-400"
+          />
+          <br />
+          <br />
+          <button
+            className="bg-amber-100 px-3 border border-gray-400 rounded-md"
+            type="submit"
+          >
+            Search
+          </button>
+        </form>
+        {error && <p className="text-rose-700">{error}</p>}
+      </div>
       {weather &&
         weather.main &&
         weather.weather &&
         weather.weather[0] &&
         weather.wind && (
-          <div className="flex flex-col items-center justify-center gap-4 bg-white p-10 shadow-sm">
-            <h2 className="text-2xl font-semibold text-gray-700"> {weather.name || "Unknown Location"}</h2>
+          <div className="flex flex-col items-center justify-center gap-4 bg-white px-20 p-10 shadow-sm">
+            <h2 className="text-2xl font-semibold text-gray-700">
+              {weather.name || "Unknown Location"}
+            </h2>
             <p className="text-3xl font-bold">
               {(weather.main.temp - 273.15).toFixed(1)}
               °C
             </p>
-            <br />
+            <p>{weather.weather?.[0]?.description || "unavailable"}</p>
             <p>
-              {weather.weather?.[0]?.description || "unavailable"}
+              <span className="font-bold">wind: {weather.wind.speed} m/s</span>
             </p>
-            <p>
-              <strong>Wind Speed:</strong>
-              {weather.wind.speed} m/s
-            </p>
-      
           </div>
         )}
     </div>
