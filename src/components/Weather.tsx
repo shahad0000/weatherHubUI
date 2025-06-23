@@ -33,7 +33,7 @@ const Weather = () => {
         weather.weather &&
         weather.weather[0] &&
         weather.wind && (
-          <div className="flex flex-col items-center justify-center gap-4 bg-white p-10">
+          <div className="flex flex-col items-center justify-center gap-4 bg-white p-10 shadow-sm">
             <h2 className="text-2xl font-semibold text-gray-700"> {weather.name || "Unknown Location"}</h2>
             <p className="text-3xl font-bold">
               {(weather.main.temp - 273.15).toFixed(1)}
