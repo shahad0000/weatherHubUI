@@ -1,9 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router";
-
-const BASE_URL = "https://weatherhubapi.onrender.com";
-// const BASE_URL = "http://localhost:3000";
+import { userLogin } from "../services/auth.services";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,11 +13,7 @@ const Login = () => {
     setLoading(true);
     setError(null);
     try {
-      await axios.post(
-        `${BASE_URL}/auth/signin`,
-        { email, password },
-        { withCredentials: true }
-      );
+      await userLogin(email, password);
       navigate("/");
     } catch (err: any) {
       if (err.response?.status === 401) {
@@ -34,7 +27,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col gap-3 items-center justify-center bg-slate-50">
+    <div className="min-h-screen flex flex-col gap-5 items-center justify-center bg-sky-50">
       <h2 className="text-3xl">Login</h2>
       <div className="flex">
         <form
@@ -63,15 +56,13 @@ const Login = () => {
               placeholder="password"
             />
           </div>
-          <div className="mt-4">
-            <button
+          <button
               type="submit"
-              className=" bg-amber-200 border border-gray-400  rounded-sm px-11"
+              className=" bg-amber-100 border border-gray-400 mt-4 rounded-sm px-11"
               disabled={loading}
             >
               {loading ? "Logging in..." : "Login"}
             </button>
-          </div>
 
           {error && <p className="text-rose-800">{error}</p>}
         </form>

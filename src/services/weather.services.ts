@@ -2,7 +2,7 @@ import axios from "axios";
 
 const getWeather = async (lat: string, lon: string) => {
   const BASE_URL = "https://weatherhubapi.onrender.com";
-//   const BASE_URL = "http://localhost:3000";
+  //   const BASE_URL = "http://localhost:3000";
 
   try {
     const res = await axios.get(`${BASE_URL}/weather?lat=${lat}&lon=${lon}`, {

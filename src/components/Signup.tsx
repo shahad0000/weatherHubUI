@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router";
-const BASE_URL = "https://weatherhubapi.onrender.com";
-// const BASE_URL = "http://localhost:3000";
+import { userSignup } from "../services/auth.services";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -11,13 +9,8 @@ const Signup = () => {
   const navigate = useNavigate();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     try {
-      await axios.post(
-        `${BASE_URL}/auth/signup`,
-        { email, password },
-        { withCredentials: true }
-      );
+      await userSignup(email, password);
       setMsg("Signup successful!");
       navigate("/");
     } catch (error: any) {
@@ -27,7 +20,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col gap-3 items-center justify-center bg-slate-50">
+    <div className="min-h-screen flex flex-col gap-3 items-center justify-center bg-sky-50">
       <h2 className="text-2xl">Sign Up</h2>
       <div className="flex flex-col justify-center items-center shadow-md p-11 bg-white">
         <form
@@ -58,7 +51,7 @@ const Signup = () => {
           <br />
           <br />
           <button
-            className="bg-indigo-100 p-1 border border-gray-400 rounded-md"
+            className="bg-amber-100 p-1 border border-gray-400 rounded-md"
             type="submit"
           >
             Sign Up
