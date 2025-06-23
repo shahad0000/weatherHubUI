@@ -11,7 +11,12 @@ const Weather = () => {
       const res = await axios.get(`${BASE_URL}/weather?lat=24.71&lon=46.68`, {
         withCredentials: true,
       });
-      setWeather(res.data);
+      setWeather({
+        ...res.data.data,
+        fetchedAt: res.data.fetchedAt,
+        source: res.data.source,
+      });
+      
       console.log(res.data)
     } catch (err: any) {
       console.error(err);
