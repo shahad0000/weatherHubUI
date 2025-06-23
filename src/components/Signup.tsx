@@ -26,13 +26,14 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="flex flex-col justify-center items-center border p-11">
-        <h2>Sign Up</h2>
+    <div className="min-h-screen flex flex-col gap-3 items-center justify-center bg-slate-50">
+      <h2 className="text-2xl">Sign Up</h2>
+      <div className="flex flex-col justify-center items-center shadow-md p-11 bg-white">
         <form
           className="flex flex-col justify-center m-4"
           onSubmit={handleSubmit}
         >
+          <label htmlFor="">Email</label>
           <input
             type="email"
             placeholder="Email"
@@ -40,9 +41,10 @@ const Signup = () => {
             autoComplete="email"
             onChange={(e) => setEmail(e.target.value)}
             required
+            className="border border-gray-400 p-1"
           />
-          <br />
-          <br />
+<br />
+          <label htmlFor="">Password</label>
           <input
             type="password"
             placeholder="Password"
@@ -50,10 +52,11 @@ const Signup = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            className="border border-gray-400 p-1"
           />
           <br />
           <br />
-          <button className="bg-indigo-100" type="submit">
+          <button className="bg-indigo-100 p-1 border border-gray-400 rounded-md" type="submit">
             Sign Up
           </button>
         </form>

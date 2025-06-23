@@ -27,18 +27,19 @@ const Weather = () => {
   }, []);
 
   return (
-    <div>
+    <div className="min-h-screen flex justify-center items-center bg-sky-100">
       {weather &&
         weather.main &&
         weather.weather &&
         weather.weather[0] &&
         weather.wind && (
-          <div className="flex flex-col items-center justify-center">
-            <h2 className="text-2xl"> {weather.name || "Unknown Location"}</h2>
-            <p>
+          <div className="flex flex-col items-center justify-center gap-4 bg-white">
+            <h2 className="text-2xl font-semibold text-gray-700"> {weather.name || "Unknown Location"}</h2>
+            <p className="text-3xl font-bold">
               {(weather.main.temp - 273.15).toFixed(1)}
               °C
             </p>
+            <br />
             <p>
               {weather.weather?.[0]?.description || "unavailable"}
             </p>

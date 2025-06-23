@@ -19,8 +19,7 @@ const Login = () => {
         { email, password },
         { withCredentials: true }
       );
-      console.log(res.data)
-
+      console.log(res.data);
     } catch (err: any) {
       if (err.response?.status === 401) {
         setError("Invalid email or password.");
@@ -33,31 +32,38 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
+    <div className="min-h-screen flex flex-col gap-3 items-center justify-center bg-slate-50">
+      <h2 className="text-3xl">Login</h2>
       <div className="flex flex-col  ">
-        <h2>Login</h2>
-        <form className="border p-4 flex flex-col gap-4" onSubmit={handleLogin}>
+        <form className="flex flex-col justify-center gap-3 shadow-md p-11 bg-white">
           <div>
-            <label>Email:</label>
+            <div>Email:</div>
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border"
+              className="border border-gray-400 rounded-sm"
+              placeholder="Email address"
             />
           </div>
-          <div style={{ marginTop: "1rem" }}>
-            <label>Password:</label>
+          <div>
+            <div>Password:</div>
             <input
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border"
+              className="border border-gray-400 rounded-sm"
+              placeholder="password"
             />
           </div>
-          <button type="submit" className=" bg-indigo-100" disabled={loading}>
+
+          <button
+            type="submit"
+            className=" bg-indigo-100 border border-gray-400 rounded-md px-1"
+            disabled={loading}
+          >
             {loading ? "Logging in..." : "Login"}
           </button>
           {error && <p className="text-rose-800">{error}</p>}
