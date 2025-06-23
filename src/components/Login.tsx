@@ -34,8 +34,11 @@ const Login = () => {
   return (
     <div className="min-h-screen flex flex-col gap-3 items-center justify-center bg-slate-50">
       <h2 className="text-3xl">Login</h2>
-      <div className="flex flex-col  ">
-        <form onSubmit={handleLogin} className="flex flex-col justify-center gap-3 shadow-md p-11 bg-white">
+      <div className="flex">
+        <form
+          onSubmit={handleLogin}
+          className="flex flex-col justify-center items-center shadow-md p-11 bg-white gap-3"
+        >
           <div>
             <div>Email:</div>
             <input
@@ -43,8 +46,7 @@ const Login = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border border-gray-400 rounded-sm"
-              placeholder="Email address"
+              className="border"
             />
           </div>
           <div>
@@ -54,14 +56,12 @@ const Login = () => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border border-gray-400 rounded-sm"
-              placeholder="password"
+              className="border"
             />
           </div>
-
           <button
             type="submit"
-            className=" bg-indigo-100 border border-gray-400 rounded-md px-1"
+            className=" bg-indigo-100 border border-gray-400 rounded-sm px-11"
             disabled={loading}
           >
             {loading ? "Logging in..." : "Login"}
