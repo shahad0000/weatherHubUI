@@ -35,7 +35,7 @@ const Login = () => {
     <div className="min-h-screen flex flex-col gap-3 items-center justify-center bg-slate-50">
       <h2 className="text-3xl">Login</h2>
       <div className="flex flex-col  ">
-        <form className="flex flex-col justify-center gap-3 shadow-md p-11 bg-white">
+        <form onSubmit={handleLogin} className="flex flex-col justify-center gap-3 shadow-md p-11 bg-white">
           <div>
             <div>Email:</div>
             <input
